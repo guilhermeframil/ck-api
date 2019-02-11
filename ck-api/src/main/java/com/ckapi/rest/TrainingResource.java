@@ -3,6 +3,7 @@ package com.ckapi.rest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -36,6 +37,15 @@ public class TrainingResource {
 			@RequestBody TrainingRequest trainingRequest) {
 
 		return new ResponseEntity<>(new TrainingResponse(), HttpStatus.OK);
+	}
+	
+	@RequestMapping(path = "/{trainingId}", method = RequestMethod.DELETE)
+	public ResponseEntity<Void> deleteTraining(
+			@PathVariable
+			long trainingId){
+		
+		return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+		
 	}
 
 }
