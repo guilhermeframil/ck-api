@@ -14,22 +14,28 @@ import com.ckapi.model.response.TrainingResponse;
 @RestController
 @RequestMapping(ResourceConstants.TRAINING)
 public class TrainingResource {
-	
-	@RequestMapping(path="", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public ResponseEntity<TrainingResponse> getTrainings(){
-		
+
+	@RequestMapping(path = "", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public ResponseEntity<TrainingResponse> getTrainings() {
+
 		return new ResponseEntity<>(new TrainingResponse(), HttpStatus.OK);
-		
+
 	}
-	
-	@RequestMapping(path = "", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE,
-					consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+
+	@RequestMapping(path = "", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<TrainingResponse> createTraining(
-			
-			@RequestBody
-			TrainingRequest trainingRequest){
-		
+
+			@RequestBody TrainingRequest trainingRequest) {
+
 		return new ResponseEntity<>(new TrainingResponse(), HttpStatus.CREATED);
+	}
+
+	@RequestMapping(path = "", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_UTF8_VALUE, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public ResponseEntity<TrainingResponse> updateTraining(
+
+			@RequestBody TrainingRequest trainingRequest) {
+
+		return new ResponseEntity<>(new TrainingResponse(), HttpStatus.OK);
 	}
 
 }
