@@ -6,6 +6,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 public class TrainingRequest {
 
+	private Long id;
 	private String name;
 	private String duration;
 	private String place;
@@ -19,9 +20,10 @@ public class TrainingRequest {
 		super();
 	}
 
-	public TrainingRequest(String name, String duration, String place, LocalDate date, String time, String leader,
-			String url) {
+	public TrainingRequest(Long id, String name, String duration, String place, LocalDate date, String time,
+			String leader, String url) {
 		super();
+		this.id = id;
 		this.name = name;
 		this.duration = duration;
 		this.place = place;
@@ -29,6 +31,14 @@ public class TrainingRequest {
 		this.time = time;
 		this.leader = leader;
 		this.url = url;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getName() {

@@ -1,32 +1,41 @@
-package com.ckapi.model.response;
+package com.ckapi.entity;
 
 import java.time.LocalDate;
 
-import org.springframework.format.annotation.DateTimeFormat;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
-public class TrainingResponse {
+@Entity
+@Table(name = "Training")
+public class TrainingEntity {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	private String name;
-	private String duration;
-	private String place;
-	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-	private LocalDate date;
-	private String time;
-	private String leader;
-	private String url;
-	private String Links;
-	
-	
 
-	public TrainingResponse() {
+	private String name;
+
+	private String duration;
+
+	private String place;
+
+	private LocalDate date;
+
+	private String time;
+
+	private String leader;
+
+	private String url;
+
+	public TrainingEntity() {
 		super();
 	}
 
-	public TrainingResponse(Long id, String name, String duration, String place, LocalDate date, String time,
-			String leader) {
+	public TrainingEntity(String name, String duration, String place, LocalDate date, String time, String leader) {
 		super();
-		this.id = id;
 		this.name = name;
 		this.duration = duration;
 		this.place = place;
@@ -97,14 +106,6 @@ public class TrainingResponse {
 
 	public void setUrl(String url) {
 		this.url = url;
-	}
-
-	public String getLinks() {
-		return Links;
-	}
-
-	public void setLinks(String links) {
-		Links = links;
 	}
 
 }
