@@ -11,8 +11,7 @@ public class TrainingResponse {
 	private String place;
 	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
 	private LocalDate date;
-	@DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
-	private LocalDate time;
+	private String time;
 	private String leader;
 	private String url;
 	private String Links;
@@ -21,7 +20,7 @@ public class TrainingResponse {
 		super();
 	}
 
-	public TrainingResponse(String name, String duration, String place, LocalDate date, LocalDate time, String leader) {
+	public TrainingResponse(String name, String duration, String place, LocalDate date, String time, String leader) {
 		super();
 		this.name = name;
 		this.duration = duration;
@@ -63,11 +62,11 @@ public class TrainingResponse {
 		this.date = date;
 	}
 
-	public LocalDate getTime() {
+	public String getTime() {
 		return time;
 	}
 
-	public void setTime(LocalDate time) {
+	public void setTime(String time) {
 		this.time = time;
 	}
 
