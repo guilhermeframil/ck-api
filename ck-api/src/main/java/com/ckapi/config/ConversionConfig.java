@@ -8,11 +8,16 @@ import org.springframework.context.support.ConversionServiceFactoryBean;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.core.convert.converter.Converter;
 
+import com.ckapi.convertor.TrainingEntityToTrainingResponseConvertor;
+import com.ckapi.convertor.TrainingRequestToTrainingEntityConvertor;
+
 @Configuration
 public class ConversionConfig {
 	
 	private Set<Converter> getConverters(){
 			Set<Converter> converters = new HashSet<Converter>();
+			converters.add(new TrainingRequestToTrainingEntityConvertor());
+			converters.add(new TrainingEntityToTrainingResponseConvertor());
 			
 			return converters;
 	}
