@@ -21,10 +21,10 @@ import com.ckapi.repository.TrainingRepository;
 @RestController
 @RequestMapping(ResourceConstants.TRAINING)
 public class TrainingResource {
-	
+
 	@Autowired
 	TrainingRepository trainingRepository;
-	
+
 	@Autowired
 	ConversionService conversionService;
 
@@ -34,45 +34,50 @@ public class TrainingResource {
 		return new ResponseEntity<>(new TrainingResponse(), HttpStatus.OK);
 
 	}
-	
+
 	@RequestMapping(path = "/{trainingId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public  ResponseEntity<TrainingEntity> getTrainingById(
-			@PathVariable
+	public ResponseEntity<TrainingEntity> getTrainingById(
+			@PathVariable 
 			Optional<TrainingEntity> trainingId) {
-		
+
 		TrainingEntity trainingEntity = trainingRepository.findById(trainingId);
-		
+
 		return new ResponseEntity<>(trainingEntity, HttpStatus.OK);
 	}
 
 	@RequestMapping(path = "", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public ResponseEntity<TrainingResponse> createTraining(
+	public ResponseEntity<TrainingResponse> createTraining(@RequestBody TrainingRequest trainingRequest) {
 
-			@RequestBody TrainingRequest trainingRequest) {
-		
 		TrainingEntity trainingEntity = conversionService.convert(trainingRequest, TrainingEntity.class);
 		trainingRepository.save(trainingEntity);
-		
+
 		TrainingResponse trainingResponse = conversionService.convert(trainingEntity, TrainingResponse.class);
 
 		return new ResponseEntity<>(trainingResponse, HttpStatus.CREATED);
 	}
 
-	@RequestMapping(path = "", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_UTF8_VALUE, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@RequestMapping(path = "/{trainingId}", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_UTF8_VALUE, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<TrainingResponse> updateTraining(
+			@RequestBody 
+			TrainingRequest trainingRequest,
+			@PathVariable
+			Optional<TrainingEntity> trainingId) {
 
-			@RequestBody TrainingRequest trainingRequest) {
+		TrainingEntity trainingEntity = conversionService.convert(trainingRequest, TrainingEntity.class);
+		trainingRepository.save(trainingEntity);
 
-		return new ResponseEntity<>(new TrainingResponse(), HttpStatus.OK);
+		TrainingResponse trainingResponse = conversionService.convert(trainingEntity, TrainingResponse.class);
+
+		return new ResponseEntity<>(trainingResponse, HttpStatus.OK);
 	}
-	
+
 	@RequestMapping(path = "/{trainingId}", method = RequestMethod.DELETE)
 	public ResponseEntity<Void> deleteTraining(
-			@PathVariable
-			long trainingId){
-		
+			@PathVariable 
+			Optional<TrainingEntity> trainingId) {
+
 		return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
-		
+
 	}
 
 }
