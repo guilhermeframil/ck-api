@@ -3,6 +3,7 @@ package com.ckapi.rest;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.convert.ConversionService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +24,9 @@ public class TrainingResource {
 	
 	@Autowired
 	TrainingRepository trainingRepository;
+	
+	@Autowired
+	ConversionService conversionService;
 
 	@RequestMapping(path = "", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<TrainingResponse> getTrainings() {
@@ -45,8 +49,13 @@ public class TrainingResource {
 	public ResponseEntity<TrainingResponse> createTraining(
 
 			@RequestBody TrainingRequest trainingRequest) {
+		
+		TrainingEntity trainingEntity = conversionService.convert(trainingRequest, TrainingEntity.class);
+		trainingRepository.save(trainingEntity);
+		
+		TrainingResponse trainingResponse = conversionService.convert(trainingEntity, TrainingResponse.class);
 
-		return new ResponseEntity<>(new TrainingResponse(), HttpStatus.CREATED);
+		return new ResponseEntity<>(trainingResponse, HttpStatus.CREATED);
 	}
 
 	@RequestMapping(path = "", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_UTF8_VALUE, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
