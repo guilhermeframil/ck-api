@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "Training")
@@ -16,16 +17,22 @@ public class TrainingEntity {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
+	@NotNull
 	private String name;
 
+	@NotNull
 	private String duration;
 
+	@NotNull
 	private String place;
 
+	@NotNull
 	private LocalDate date;
 
+	@NotNull
 	private String time;
 
+	@NotNull
 	private String leader;
 
 	private String url;
@@ -106,6 +113,12 @@ public class TrainingEntity {
 
 	public void setUrl(String url) {
 		this.url = url;
+	}
+
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return "TrainingEntity {" + "date=" + date;
 	}
 
 }
